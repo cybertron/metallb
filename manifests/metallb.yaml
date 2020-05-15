@@ -95,6 +95,26 @@ metadata:
   name: speaker
   namespace: metallb-system
 ---
+apiVersion: v1
+kind: SecurityContextConstraints
+metadata:
+  name: metallb-speaker
+allowPrivilegedContainer: true
+allowedCapabilities:
+- NET_ADMIN
+- NET_RAW
+- SYS_ADMIN
+allowHostNetwork: true
+allowHostPorts: true
+users:
+- system:serviceaccount:metallb-system:speaker
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
